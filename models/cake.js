@@ -1,28 +1,19 @@
-var orm = require("../config/orm.js");
-
-var cake = {
-    all: function(cb) {
-        orm.all("cakes", function(res) {
-            cb(res);
-        });
-    },
-    create: function(name, cb) {
-        orm.create("cakes", [
-            "cake_name", "devoured"
-        ], [
-            name, false
-        ], cb);
-    },
-    update: function(id, cb) {
-        var condition = "id=" + id;
-        orm.update("cakes", {
-            devoured: true
-        }, condition, cb);
-    },
-    delete: function(id, cb) {
-        var condition = "id=" + id;
-        orm.delete("cakes", condition, cb);
-    }
+module.exports = function(sequelize, DataTypes) {
+    var Cake = sequelize.define("Cake", {
+        cake_name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        devoured: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        }
+    }, {
+        classMethods: {
+            associate: function(models) {
+                Cake.hasOne(models.Customer);
+            }
+        }
+    });
+    return Cake;
 };
-
-module.exports = cake;
