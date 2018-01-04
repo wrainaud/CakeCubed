@@ -18,8 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(methodOverride("_method"));
 
-app.use(express.static(__dirname + "public"));
-app.use(favicon(path.join(__dirname + "/public", 'favicon.png')))
+app.use(express.static(__dirname + "/public"));
+app.use(favicon(path.join(__dirname + "/public/assets/", "favicon.ico")))
 
 var routes = require("./controllers/cakesController");
 
