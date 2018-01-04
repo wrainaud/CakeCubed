@@ -1,20 +1,25 @@
 var express = require("express");
+var exphbs = require("express-handlebars");
+var path = require('path');
 var bodyParser = require("body-parser");
+var favicon = require('serve-favicon');
 var methodOverride = require("method-override");
 var errorHandler = require("errorhandler");
-var PORT = process.env.PORT || 3000;
 var db = require("./models");
+
+
 var app = express();
+var PORT = process.env.PORT || 3000;
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
-app.use(express.static(__dirname + "./public"));
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(methodOverride("_method"));
-var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+app.use(express.static(__dirname + "public"));
+app.use(favicon(path.join(__dirname + "/public", 'favicon.png')))
 
 var routes = require("./controllers/cakesController");
 
