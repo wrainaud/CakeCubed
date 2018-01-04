@@ -63,6 +63,18 @@ router.put("/cakes/update", function(req, res) {
                 res.redirect("/");
             });
     }
+
+});
+
+router.delete("/cakes/update", function(req, res) {
+    db.Cake.destroy({
+            where: {
+                id: req.body.cake_id
+            }
+        })
+        .then(function(dbCake) {
+            res.redirect("/");
+        });
 });
 
 module.exports = router;

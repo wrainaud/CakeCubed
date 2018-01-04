@@ -38,12 +38,13 @@
 <div class="container cake-list">
 	<div class="col-xs-6 text-center" class="task">
 		<div class="row">
-			{{#each cake_data}} {{#unless this.devoured}}
+			{{#each cake}} {{#unless this.devoured}}
 			<div class="input-group">
 				<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}}" readonly>
 				<span class="input-group-btn">
 					<form method="POST" action="/cakes/update?_method=PUT" class="button-size">
 						<input type="hidden" type="text" name="cake_id" value={{this.id}}>
+						<input class="custInput" type="text" name="customer" placeholder="Customer?">
 						<button type="submit" class="btn btn-success">Eat it!</button>
 					</form>
 				</span>
@@ -52,16 +53,28 @@
 		</div>
 	</div>
 	<div class="col-xs-6 text-center" class="task">
-		{{#each cake_data}} {{#if this.devoured}}
-			<div class="input-group">
-				<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}}" readonly>
-				<span class="input-group-btn">
-					<form method="POST" action="/cakes/update?_method=DELETE" class="button-size">
-						<input type="hidden" type="text" name="cake_id" value={{this.id}}>
-						<button type="submit" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button> 
-					</form>
-				</span>
-			</div>
+		{{#each cake}} {{#if this.devoured}}
+			{{#if this.Customer.customer}}
+				<div class="input-group">
+					<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}} (Eaten by {{this.Customer.customer}})" readonly>
+					<span class="input-group-btn">
+						<form method="POST" action="/cakes/update?_method=DELETE" class="button-size">
+							<input type="hidden" type="text" name="cake_id" value={{this.id}}>
+							<button type="submit" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button> 
+						</form>
+					</span>
+				</div>
+			{{else}}
+					<div class="input-group">
+					<input class="form-control" type="text" placeholder="{{this.id}} . {{this.cake_name}}" readonly>
+					<span class="input-group-btn">
+						<form method="POST" action="/cakes/update?_method=DELETE" class="button-size">
+							<input type="hidden" type="text" name="cake_id" value={{this.id}}>
+							<button type="submit" class="btn btn-danger"><i class="fa fa-window-close" aria-hidden="true"></i></button> 
+						</form>
+					</span>
+				</div>
+			{{/if}}
 		{{/if}} {{/each}}		
 	</div>
 

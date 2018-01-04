@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
         }
     })
     Cake.associate = function(models) {
-        Cake.hasOne(models.Customer)
+        Cake.hasMany(models.Customer)
     };
     return Cake;
 }
