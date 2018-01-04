@@ -18,6 +18,9 @@
         "method-override": "^2.3.10",
         "mysql": "^2.12.0",
         "mysql2": "^1.5.1",
-        "sequelize": "^4.28.6"
+        "sequelize": "^4.28.7"
+    },
+    "devDependencies": {
+        "handlebars-helper-css": "^0.1.0"
     }
 }

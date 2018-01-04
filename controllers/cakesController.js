@@ -17,7 +17,7 @@ router.get("/cakes", function(req, res) {
         })
         .then(function(dbCake) {
             var hbsObject = {
-                burger: dbCake
+                cake: dbCake
             };
             return res.render("index", hbsObject);
         });

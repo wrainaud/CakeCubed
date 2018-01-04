@@ -1,5 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
     var Cake = sequelize.define("Cake", {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
         cake_name: {
             type: DataTypes.STRING,
             allowNull: false
@@ -8,12 +13,9 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         }
-    }, {
-        classMethods: {
-            associate: function(models) {
-                Cake.hasOne(models.Customer);
-            }
-        }
-    });
+    })
+    Cake.associate = function(models) {
+        Cake.hasOne(models.Customer)
+    };
     return Cake;
-};
+}
